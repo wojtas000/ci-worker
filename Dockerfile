@@ -26,6 +26,13 @@ WORKDIR /app
 COPY --from=python-deps /.venv /app/.venv
 ENV PATH="/app/.venv/bin:$PATH"
 
+
+FROM ubuntu
+
+# add robot.jar to container
+RUN apt-get update && apt-get install -y wget
+RUN wget https://github.com/ontodev/robot/releases/download/v1.9.1/robot.jar
+
 # Install application into container
 COPY . .
 
